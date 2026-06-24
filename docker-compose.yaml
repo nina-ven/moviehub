@@ -24,7 +24,10 @@ services:
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
     ports:
       - "8080:8080"
+    volumes:
+      - keycloak_data:/opt/keycloak/data
 
 
 volumes:
   postgres_data:
+  keycloak_data:
