@@ -27,6 +27,34 @@ services:
     volumes:
       - keycloak_data:/opt/keycloak/data
 
+  api:
+    build: ./api
+    container_name: moviehub-api
+    restart: always
+    depends_on:
+      - postgres
+      - keycloak
+    ports:
+     - "3000:3000"
+
+  spa:
+    build: ./spa
+    container_name: moviehub-spa
+    restart: always
+    depends_on:
+      - api
+    ports:
+      - "5173:5173"
+
+  ssr:
+    build: ./ssr
+    container_name: moviehub-ssr
+    restart: always
+    depends_on:
+      - api
+    ports:
+      - "3001:3001"
+
 
 volumes:
   postgres_data:
