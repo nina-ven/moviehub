@@ -42,7 +42,7 @@ router.get("/:id", async(req,res)=>{
 router.post(
     "/",
     auth,
-    requireRole("ADMIN"),
+    requireRole("ADMIN", "MODERATOR"),
     async(req,res)=>{
 
 
@@ -83,7 +83,7 @@ router.post(
 router.delete(
     "/:id",
     auth,
-    requireRole("ADMIN"),
+    requireRole("ADMIN", "MODERATOR"),
     async(req,res)=>{
 
 

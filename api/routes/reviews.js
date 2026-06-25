@@ -38,7 +38,7 @@ router.get(
 router.post(
     "/movie/:movieId",
     auth,
-    requireRole("USER"),
+    requireRole("USER", "MODERATOR"),
     async(req,res)=>{
 
 
@@ -90,7 +90,7 @@ router.post(
 router.delete(
     "/:id",
     auth,
-    requireRole("ADMIN"),
+    requireRole("ADMIN", "MODERATOR"),
     async(req,res)=>{
 
 

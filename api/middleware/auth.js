@@ -82,35 +82,35 @@ function auth(req,res,next){
 
 
 
-function requireRole(role){
+function requireRole(...allowedRoles) {
 
-
-    return (req,res,next)=>{
-
+    return (req, res, next) => {
 
         const roles =
-            req.user.realm_access?.roles || [];
+            req.user.realm_access.roles;
 
+        const hasRole =
+            allowedRoles.some(role =>
+                roles.includes(role)
+            );
 
+        if (!hasRole) {
 
-        if(!roles.includes(role)){
-
-
-            return res.status(403).json({
-
-                error:
-                    "Brak uprawnień"
-
-            });
+            return res
+                .status(403)
+                .json({
+                    error: "Brak uprawnień"
+                });
 
         }
-
 
         next();
 
     };
 
 }
+
+module.exports = requireRole;
 
 
 
